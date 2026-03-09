@@ -1,0 +1,16 @@
+name: Update Archive
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Runs daily at noon UTC
+  workflow_dispatch:       # Allows manual trigger from GitHub
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger archive update
+        run: |
+          curl -s -X POST \
+            -H "X-API-Key: ${{ secrets.UPDATE_API_KEY }}" \
+            https://YOUR-APP-DOMAIN.replit.app/api/update
